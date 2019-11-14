@@ -6,9 +6,6 @@ Configure miss: machine/soundcard.h presence
 Configure miss: machine/soundcard.h
 Configure miss: sys/audioio.h usability
 Configure miss: sys/audioio.h
-Configure miss: sndio.h usability
-Configure miss: sndio.h presence
-Configure miss: sndio.h
 Configure miss: libroar/config.h usability
 Configure miss: libroar/config.h presence
 Configure miss: libroar/config.h

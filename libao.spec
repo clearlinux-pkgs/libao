@@ -4,7 +4,7 @@
 #
 Name     : libao
 Version  : 1.2.2
-Release  : 1
+Release  : 2
 URL      : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Source0  : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Summary  : Cross Platform Audio Output Library Development
@@ -19,6 +19,7 @@ BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(gthread-2.0)
 BuildRequires : pkgconfig(libpulse-simple)
 BuildRequires : pkgconfig(x11)
+BuildRequires : sndio-dev
 
 %description
 Libao is a cross-platform audio output library.  It currently supports
@@ -79,13 +80,14 @@ man components for the libao package.
 
 %prep
 %setup -q -n libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225
+cd %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572935481
+export SOURCE_DATE_EPOCH=1573710282
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,10 +107,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1572935481
+export SOURCE_DATE_EPOCH=1573710282
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libao
-cp COPYING %{buildroot}/usr/share/package-licenses/libao/COPYING
+cp %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225/COPYING %{buildroot}/usr/share/package-licenses/libao/dfac199a7539a404407098a2541b9482279f690d
 %make_install
 
 %files
@@ -133,12 +135,13 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libao/COPYING
 /usr/lib64/ao/plugins-4/libalsa.so
 /usr/lib64/ao/plugins-4/liboss.so
 /usr/lib64/ao/plugins-4/libpulse.so
+/usr/lib64/ao/plugins-4/libsndio.so
 /usr/lib64/libao.so.4
 /usr/lib64/libao.so.4.1.1
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libao/COPYING
+/usr/share/package-licenses/libao/dfac199a7539a404407098a2541b9482279f690d
 
 %files man
 %defattr(0644,root,root,0755)
