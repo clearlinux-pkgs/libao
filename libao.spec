@@ -4,7 +4,7 @@
 #
 Name     : libao
 Version  : 1.2.2
-Release  : 2
+Release  : 3
 URL      : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Source0  : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Summary  : Cross Platform Audio Output Library Development
@@ -87,7 +87,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573710282
+export SOURCE_DATE_EPOCH=1574062086
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -107,7 +107,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1573710282
+export SOURCE_DATE_EPOCH=1574062086
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libao
 cp %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225/COPYING %{buildroot}/usr/share/package-licenses/libao/dfac199a7539a404407098a2541b9482279f690d
