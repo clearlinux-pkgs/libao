@@ -4,4 +4,4 @@ libdl.so.2
 libpthread.so.0
 libpulse-simple.so.0
 libpulse.so.0
-libsndio.so.7.0
+libsndio.so.7.1

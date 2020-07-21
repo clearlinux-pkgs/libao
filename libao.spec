@@ -4,7 +4,7 @@
 #
 Name     : libao
 Version  : 1.2.2
-Release  : 4
+Release  : 5
 URL      : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Source0  : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Summary  : Cross Platform Audio Output Library Development
@@ -83,36 +83,53 @@ man components for the libao package.
 %prep
 %setup -q -n libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225
 cd %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225
+pushd ..
+cp -a libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576542415
+export SOURCE_DATE_EPOCH=1595347476
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=haswell "
+export CXXFLAGS="$CXXFLAGS -m64 -march=haswell "
+export FFLAGS="$FFLAGS -m64 -march=haswell "
+export FCFLAGS="$FCFLAGS -m64 -march=haswell "
+export LDFLAGS="$LDFLAGS -m64 -march=haswell "
+%autogen --disable-static
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
+cd ../buildavx2;
+make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1576542415
+export SOURCE_DATE_EPOCH=1595347476
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libao
 cp %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225/COPYING %{buildroot}/usr/share/package-licenses/libao/dfac199a7539a404407098a2541b9482279f690d
+pushd ../buildavx2/
+%make_install_avx2
+popd
 %make_install
 
 %files
@@ -134,6 +151,10 @@ cp %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225/COPYING %{buildro
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/ao/plugins-4/haswell/libalsa.so
+/usr/lib64/ao/plugins-4/haswell/liboss.so
+/usr/lib64/ao/plugins-4/haswell/libpulse.so
+/usr/lib64/ao/plugins-4/haswell/libsndio.so
 /usr/lib64/ao/plugins-4/libalsa.so
 /usr/lib64/ao/plugins-4/liboss.so
 /usr/lib64/ao/plugins-4/libpulse.so
