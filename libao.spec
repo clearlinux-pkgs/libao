@@ -5,7 +5,7 @@
 #
 Name     : libao
 Version  : 1.2.2
-Release  : 6
+Release  : 7
 URL      : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Source0  : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Summary  : Cross Platform Audio Output Library Development
