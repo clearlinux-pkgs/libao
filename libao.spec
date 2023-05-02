@@ -5,13 +5,12 @@
 #
 Name     : libao
 Version  : 1.2.2
-Release  : 7
+Release  : 8
 URL      : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Source0  : https://github.com/xiph/libao/archive/20dc8ed9fa4605f5c25e7496ede42e8ba6468225/1.2.2.tar.gz
 Summary  : Cross Platform Audio Output Library Development
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: libao-filemap = %{version}-%{release}
 Requires: libao-lib = %{version}-%{release}
 Requires: libao-license = %{version}-%{release}
 Requires: libao-man = %{version}-%{release}
@@ -59,19 +58,10 @@ Requires: libao-man = %{version}-%{release}
 doc components for the libao package.
 
 
-%package filemap
-Summary: filemap components for the libao package.
-Group: Default
-
-%description filemap
-filemap components for the libao package.
-
-
 %package lib
 Summary: lib components for the libao package.
 Group: Libraries
 Requires: libao-license = %{version}-%{release}
-Requires: libao-filemap = %{version}-%{release}
 
 %description lib
 lib components for the libao package.
@@ -105,15 +95,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1681404112
+export SOURCE_DATE_EPOCH=1682993391
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %autogen --disable-static
 make  %{?_smp_mflags}
 
@@ -136,7 +126,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1681404112
+export SOURCE_DATE_EPOCH=1682993391
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libao
 cp %{_builddir}/libao-20dc8ed9fa4605f5c25e7496ede42e8ba6468225/COPYING %{buildroot}/usr/share/package-licenses/libao/dfac199a7539a404407098a2541b9482279f690d || :
@@ -152,10 +142,10 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
+/V3/usr/lib64/libao.so
 /usr/include/ao/ao.h
 /usr/include/ao/os_types.h
 /usr/include/ao/plugin.h
-/usr/lib64/glibc-hwcaps/x86-64-v3/libao.so
 /usr/lib64/libao.so
 /usr/lib64/pkgconfig/ao.pc
 /usr/share/aclocal/*.m4
@@ -164,21 +154,20 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/doc/libao/*
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-libao
-
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/ao/plugins-4/libalsa.so
+/V3/usr/lib64/ao/plugins-4/liboss.so
+/V3/usr/lib64/ao/plugins-4/libpulse.so
+/V3/usr/lib64/ao/plugins-4/libsndio.so
+/V3/usr/lib64/libao.so.4
+/V3/usr/lib64/libao.so.4.1.1
 /usr/lib64/ao/plugins-4/libalsa.so
 /usr/lib64/ao/plugins-4/liboss.so
 /usr/lib64/ao/plugins-4/libpulse.so
 /usr/lib64/ao/plugins-4/libsndio.so
-/usr/lib64/glibc-hwcaps/x86-64-v3/libao.so.4
-/usr/lib64/glibc-hwcaps/x86-64-v3/libao.so.4.1.1
 /usr/lib64/libao.so.4
 /usr/lib64/libao.so.4.1.1
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
