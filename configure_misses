@@ -1,32 +1,20 @@
-Configure miss: mmsystem.h
-Configure miss: esd-config
-Configure miss: ESD - version >= 0.2.8
-Configure miss: machine/soundcard.h usability
-Configure miss: machine/soundcard.h presence
-Configure miss: machine/soundcard.h
-Configure miss: sys/audioio.h usability
-Configure miss: sys/audioio.h
-Configure miss: libroar/config.h usability
-Configure miss: libroar/config.h presence
-Configure miss: libroar/config.h
-Configure miss: artsc-config
 Configure miss: AuOpenServer in -laudio
-Configure miss: audio/audiolib.h usability
-Configure miss: audio/audiolib.h presence
-Configure miss: audio/audiolib.h
-Configure miss: mmsystem.h
-Configure miss: esd-config
-Configure miss: ESD - version >= 0.2.8
-Configure miss: machine/soundcard.h usability
-Configure miss: machine/soundcard.h presence
-Configure miss: machine/soundcard.h
-Configure miss: sys/audioio.h usability
-Configure miss: sys/audioio.h
-Configure miss: libroar/config.h usability
-Configure miss: libroar/config.h presence
-Configure miss: libroar/config.h
-Configure miss: artsc-config
 Configure miss: AuOpenServer in -laudio
-Configure miss: audio/audiolib.h usability
-Configure miss: audio/audiolib.h presence
+Configure miss: ESD - version >= 0.2.8
+Configure miss: ESD - version >= 0.2.8
+Configure miss: artsc-config
+Configure miss: artsc-config
 Configure miss: audio/audiolib.h
+Configure miss: audio/audiolib.h
+Configure miss: esd-config
+Configure miss: esd-config
+Configure miss: libroar/config.h
+Configure miss: libroar/config.h
+Configure miss: machine/soundcard.h
+Configure miss: machine/soundcard.h
+Configure miss: mmsystem.h
+Configure miss: mmsystem.h
+Configure miss: sys/audioio.h
+Configure miss: sys/audioio.h
+Configure miss: x86_64-generic-linux-gnu-file
+Configure miss: x86_64-generic-linux-gnu-file
